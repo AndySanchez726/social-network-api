@@ -15,12 +15,16 @@ const UserSchema = new Schema(
             match: [ /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/, 'Please use a valid email address.']
         },
         thoughts: [
-            type: Schema.Types.ObjectId,
-            ref: 'Thought'
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'Thought'
+            }
         ],
         friends: [
-            type: Schema.Types.ObjectId,
-            ref: 'Users'
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'Users'
+            }
         ]
     },
     {
@@ -33,7 +37,7 @@ const UserSchema = new Schema(
 
 UserSchema.virtual('thoughtCount').get(function() {
     return this.thoughts.length
-
+});
 // create the user model using userschema
 const User = model('User', UserSchema);
 
